@@ -61,7 +61,7 @@ function soDuongMin() {
         }
     }
 
-   
+
     var MinDuong = mangDuong[0];
     for (var i = 1; i < mangDuong.length; i++) {
         if (MinDuong > mangDuong[i]) {
@@ -94,7 +94,7 @@ document.getElementById("btn5").onclick = soChanCuoi;
 
 
 function doiCho() {
-  
+
     var vitri1 = Number(document.getElementById("nhapvitri1").value);
     var vitri2 = Number(document.getElementById("nhapvitri2").value);
 
@@ -119,17 +119,88 @@ function sapXep() {
     var sx = []
     for (i = 0; i < mangChinh.length; i++) {
         for (j = 0; j < mangChinh.length; j++) {
-            if(mangChinh[j]>mangChinh[j+1]){
+            if (mangChinh[j] > mangChinh[j + 1]) {
                 var tam = mangChinh[j];
-                mangChinh[j]=mangChinh[j+1];
-                mangChinh[j+1] = tam;
+                mangChinh[j] = mangChinh[j + 1];
+                mangChinh[j + 1] = tam;
             }
-        
+
         }
     }
-document.getElementById("txt7").innerHTML = mangChinh
+    document.getElementById("txt7").innerHTML = mangChinh
 }
 document.getElementById("btn7").onclick = sapXep;
 
 
 //! tìm số nguyên đâu tiên
+function kiemtra(num) {
+
+    var s = Math.sqrt(num);
+    for (var i = 2; i <= s; i++)
+        if (num % i === 0) {
+            return false;
+        }
+
+    return num > 1;
+}
+
+function soNguyenDauTien() {
+    var soNguyen = "không phải số nguyên tố"
+    for (var i = 0; i <= mangChinh.length; i++) {
+        if (kiemtra(mangChinh[i])) {
+            soNguyen = mangChinh[i]
+            break;
+        }
+    }
+    document.getElementById("txt8").innerHTML = soNguyen;
+}
+document.getElementById("btn8").onclick = soNguyenDauTien;
+
+//! đếm só nguyên
+
+var mangSoThuc = []
+function nhapsothuc() {
+    var num = Number(document.getElementById("themso").value);
+    mangSoThuc.push(num);
+    document.getElementById("txtthemso").innerHTML = mangSoThuc;
+}
+document.getElementById("btnsothuc").onclick = nhapsothuc;
+
+function demSoNguyen() {
+    var dem = "";
+    for (var i = 0; i <= mangSoThuc.length; i++) {
+        if (Number.isInteger(mangSoThuc[i])) {
+
+            dem++;
+        }
+    }
+    document.getElementById("txt9").innerHTML = dem;
+}
+document.getElementById("btn9").onclick = demSoNguyen;
+
+
+//! so sanh sô luọng só am và sô dương
+
+
+function soSanh(){
+    var duong = 0;
+    var am = 0;
+    var ketqua =""
+    for(var i=0;i<=mangChinh.length;i++){
+         if(mangChinh[i]>0){
+            duong++
+            
+         }else if(mangChinh[i]<0){
+            am++
+         }
+    }
+    if(duong>am){
+        ketqua = "số dương > Số âm"
+    }else if(duong<am){
+        ketqua="Số dương < Số âm"
+    }else{
+        ketqua = "Số dương = Số âm"
+    }
+    document.getElementById("txt10").innerHTML = ketqua
+}
+document.getElementById("btn10").onclick = soSanh
